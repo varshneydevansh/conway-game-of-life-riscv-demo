@@ -95,3 +95,15 @@ The outer `for generation in range(8)` loop acts like a clock. Each loop iterati
 
 The blinker pattern keeps flipping between vertical and horizontal, which is 
 useful because it proves the update logic is working repeatedly and not just once.
+
+### Iteration 6 - Add a main simulation function
+In this version, I moved the simulation loop into `run_simulation(starting_grid, generations)`.
+
+The behavior is still the same, but the structure is clearer now:
+
+- `grid` stores the starting state
+- helper functions handle display, neighbor counting, and rule application
+- `run_simulation` controls the repeated clock ticks
+- `main` is the entry point of the script
+
+This makes the script easier to extend later without mixing setup code and simulation code.

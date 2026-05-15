@@ -1,5 +1,5 @@
-# Conway's Game of Life - Iteration 5
-# Goal: animate multiple generations like repeated clock ticks
+# Conway's Game of Life - Iteration 6
+# Goal: move the simulation loop into a main entry point
 
 import os
 import time
@@ -85,16 +85,26 @@ def next_generation(current_grid):
     return next_grid
 
 
-current_grid = grid
+def run_simulation(starting_grid, generations):
+    current_grid = starting_grid
 
-# This outer loop is the simulation clock
-# Each pass shows one generation and then computes the next one
-for generation in range(8):
-    os.system("clear")
+    # This outer loop is the simulation clock
+    # Each pass shows one generation and then computes the next one
+    for generation in range(generations):
+        os.system("clear")
 
-    print("Generation:", generation)
-    print_grid(current_grid)
+        print("Generation:", generation)
+        print_grid(current_grid)
 
-    time.sleep(0.5)
+        time.sleep(0.5)
 
-    current_grid = next_generation(current_grid)
+        current_grid = next_generation(current_grid)
+
+
+def main():
+    run_simulation(grid, 8)
+
+
+if __name__ == "__main__":
+    main()
+
