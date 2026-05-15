@@ -79,3 +79,19 @@ I added two functions:
 - `next_generation(current_grid)` scans the full grid and builds the next grid
 
 The vertical blinker now turns into a horizontal blinker after one generation.
+
+### Iteration 5 - Animate multiple generations
+In this version, I added a loop that runs the simulation for multiple generations.
+
+This is where the program starts to feel like a tiny clocked system:
+
+- print the current grid
+- wait briefly
+- compute the next grid
+- replace the current grid with the next grid
+- repeat
+
+The outer `for generation in range(8)` loop acts like a clock. Each loop iteration is one tick of the simulation.
+
+The blinker pattern keeps flipping between vertical and horizontal, which is 
+useful because it proves the update logic is working repeatedly and not just once.

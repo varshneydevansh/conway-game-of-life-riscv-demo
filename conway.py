@@ -1,5 +1,8 @@
-# Conway's Game of Life - Iteration 4
-# Goal: compute the next generation using Conway's rules
+# Conway's Game of Life - Iteration 5
+# Goal: animate multiple generations like repeated clock ticks
+
+import os
+import time
 
 grid = [
     [0, 0, 0, 0, 0],
@@ -82,9 +85,16 @@ def next_generation(current_grid):
     return next_grid
 
 
-print("Current generation:")
-print_grid(grid)
+current_grid = grid
 
-print()
-print("Next generation:")
-print_grid(next_generation(grid))
+# This outer loop is the simulation clock
+# Each pass shows one generation and then computes the next one
+for generation in range(8):
+    os.system("clear")
+
+    print("Generation:", generation)
+    print_grid(current_grid)
+
+    time.sleep(0.5)
+
+    current_grid = next_generation(current_grid)
