@@ -1,5 +1,5 @@
-# Conway's Game of Life - Iteration 10
-# Goal: add usage help and safer command-line parsing
+# Conway's Game of Life - Iteration 11
+# Goal: generate help text from the available pattern list
 
 import os
 import sys
@@ -32,8 +32,10 @@ patterns = {
 }
 
 def print_usage():
+    available_patterns = ", ".join(patterns)
+
     print("Usage: python3 conway.py [pattern] [generations]")
-    print("Patterns: blinker, glider")
+    print("Patterns:", available_patterns)
     print("Example: python3 conway.py glider 40")
 
 def print_grid(grid):

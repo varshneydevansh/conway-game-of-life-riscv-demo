@@ -164,3 +164,17 @@ I also added checks for invalid input. For example, this should not crash with a
 - python3 conway.py glider abc
 
 
+This step is less about Conway itself and more about making the script behave like a small usable tool.
+
+### Iteration 11 - Generate help text from available patterns
+In this version, I changed `print_usage()` so it reads the available pattern names from the `patterns` dictionary.
+
+Earlier, the program had the pattern names in two places:
+
+- inside `patterns`
+- inside the help text
+
+That kind of duplication can become a bug later. 
+If I add a new pattern, I want the help text to update automatically.
+
+
