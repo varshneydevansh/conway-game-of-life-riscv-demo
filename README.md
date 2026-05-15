@@ -44,3 +44,25 @@ I am thinking of this like a tiny display module. Later, when the grid changes f
 generation to the next, I can reuse the same function instead of rewriting the print loop.
 
 The iteration is still visible inside the function it scans each row and then each cell inside that row.
+
+### Iteration 3 - Count live neighbors for one cell
+In this version, I added `count_live_neighbors(grid, row_index, col_index)`.
+
+This is the first part that feels like the actual Conway machine. 
+A cell does not know the whole world. It only reads the 8 nearby positions around itself.
+
+I used `neighbor_offsets` to describe those 8 positions:
+
+- one row above
+- same row
+- one row below
+- one column left
+- same column
+- one column right
+
+The center cell itself is skipped because a cell should not count itself as its own neighbor.
+
+I also added boundary checks so the program does not try to read outside the grid.
+
+For the vertical blinker pattern, the center cell has 2 live neighbors: one above it and one below it.
+
