@@ -1,5 +1,5 @@
-# Conway's Game of Life - Iteration 14
-# Goal: choose the display delay from the command line
+# Conway's Game of Life - Iteration 15
+# Goal: add a no-clear mode for readable terminal logs
 
 import os
 import sys
@@ -44,9 +44,9 @@ patterns = {
 def print_usage():
     available_patterns = ", ".join(patterns)
 
-    print("Usage: python3 conway.py [pattern] [generations] [delay]")
+    print("Usage: python3 conway.py [pattern] [generations] [delay] [--no-clear]")
     print("Patterns:", available_patterns)
-    print("Example: python3 conway.py glider 40 0.5")
+    print("Example: python3 conway.py glider 40 0.5 --no-clear")
 
 def print_grid(grid):
     # We scan the grid row by row, then cell by cell
@@ -131,16 +131,18 @@ def next_generation(current_grid):
     return next_grid
 
 
-def run_simulation(starting_grid, generations, delay):
+def run_simulation(starting_grid, generations, delay, clear_screen):
     current_grid = starting_grid
 
     # This outer loop is the simulation clock
     # Each pass shows one generation and then computes the next one
     for generation in range(generations):
-        os.system("clear")
+        if clear_screen:
+            os.system("clear")
 
         print("Generation:", generation, "| Live cells:", count_live_cells(current_grid))
         print_grid(current_grid)
+        print()
 
         time.sleep(delay)
 
@@ -151,6 +153,7 @@ def main():
     pattern_name = "glider"
     generations = 20
     delay = 0.5
+    clear_screen = True
 
     if len(sys.argv) > 1:
         if sys.argv[1] == "--help":
@@ -179,6 +182,13 @@ def main():
             print("Delay must be a number.")
             print_usage()
             return
+    if len(sys.argv) > 4:
+        if sys.argv[4] == "--no-clear":
+            clear_screen = False
+        else:
+            print("Unknown option:", sys.argv[4])
+            print_usage()
+            return
     
     if delay < 0:
         print("Delay cannot be negative.")
@@ -190,7 +200,7 @@ def main():
         print_usage()
         return
 
-    run_simulation(patterns[pattern_name], generations, delay)
+    run_simulation(patterns[pattern_name], generations, delay, clear_screen)
 
 
 

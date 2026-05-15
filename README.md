@@ -215,4 +215,22 @@ python3 conway.py glider 40 0.2
 python3 conway.py block 5 1
 ```
 
+The delay controls only how fast the frames are displayed. It does not change the grid, the neighbor counting, or Conway's rules.
+
+This is a useful separation: simulation behavior and display timing are related when I watch the program, but they are not the same part of the logic.
+
+### Iteration 15 - Add no-clear mode
+In this version, I added a `--no-clear` option.
+
+Normally the program clears the terminal before each generation,
+ which makes the animation easier to watch. But for debugging, 
+ logs, and documentation, it is useful to keep every generation visible.
+
+Now I can run:
+
+```bash
+python3 conway.py blinker 4 0 --no-clear
+```
+
+
 
