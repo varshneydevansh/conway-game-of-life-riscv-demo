@@ -1,5 +1,5 @@
-# Conway's Game of Life - Iteration 12
-# Goal: add a stable still-life pattern
+# Conway's Game of Life - Iteration 13
+# Goal: show the live cell count for each generation
 
 import os
 import sys
@@ -60,6 +60,16 @@ def print_grid(grid):
                 line += "."
 
         print(line)
+
+def count_live_cells(grid):
+    live_cells = 0
+
+    # We scan the whole grid and count every cell that is alive
+    for row in grid:
+        for cell in row:
+            live_cells += cell
+
+    return live_cells
 
 def count_live_neighbors(grid, row_index, col_index):
     live_neighbors = 0
@@ -129,7 +139,7 @@ def run_simulation(starting_grid, generations):
     for generation in range(generations):
         os.system("clear")
 
-        print("Generation:", generation)
+        print("Generation:", generation, "| Live cells:", count_live_cells(current_grid))
         print_grid(current_grid)
 
         time.sleep(0.5)

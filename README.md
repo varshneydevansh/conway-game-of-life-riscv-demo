@@ -188,3 +188,19 @@ so every live cell survives and no surrounding dead cell has exactly 3 neighbors
 This also tests the improvement from the previous iteration. I only added 
 the pattern to the `patterns` dictionary, and the help text now includes it automatically.
 
+### Iteration 13 - Show live cell count
+In this version, I added `count_live_cells(grid)`.
+
+This function scans the whole grid and counts how many cells are alive in the current generation.
+
+Now each frame prints both the generation number and the live cell count. 
+This gives me a tiny measurement layer on top of the visual output.
+
+For example:
+
+- the block stays at 4 live cells
+- the blinker stays at 3 live cells
+- the glider usually stays at 5 live cells while moving
+
+This connects to a systems idea: sometimes visual output is useful, but adding a small numeric signal makes behavior easier to verify.
+
