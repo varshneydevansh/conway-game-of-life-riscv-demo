@@ -21,7 +21,7 @@ python3 conway.py
 
 # Iteration Log
 
-Iteration 1 - Static grid renderer
+### Iteration 1 - Static grid renderer
 In the first version, I only represent a 5x5 grid using 0 and 1.
 
 - 0 means a dead cell
@@ -30,3 +30,17 @@ In the first version, I only represent a 5x5 grid using 0 and 1.
 - `#` is printed for a live cell
 
 At this stage, there are no Conway rules yet. The goal is only to understand the grid as memory and the print loop as scanning that memory.
+
+### Iteration 2 - Move display logic into a function
+In this version, I moved the printing logic into a `print_grid(grid)` function.
+
+The output is still the same, but the structure is better now:
+
+- the grid stores the state
+- the function knows how to display that state
+- the main program can simply call `print_grid(grid)`
+
+I am thinking of this like a tiny display module. Later, when the grid changes from one 
+generation to the next, I can reuse the same function instead of rewriting the print loop.
+
+The iteration is still visible inside the function it scans each row and then each cell inside that row.
