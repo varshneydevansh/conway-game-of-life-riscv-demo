@@ -1,5 +1,5 @@
-# Conway's Game of Life - Iteration 9
-# Goal: choose the pattern and generation count from the command line
+# Conway's Game of Life - Iteration 10
+# Goal: add usage help and safer command-line parsing
 
 import os
 import sys
@@ -30,6 +30,11 @@ patterns = {
     "blinker": blinker_grid,
     "glider": glider_grid,
 }
+
+def print_usage():
+    print("Usage: python3 conway.py [pattern] [generations]")
+    print("Patterns: blinker, glider")
+    print("Example: python3 conway.py glider 40")
 
 def print_grid(grid):
     # We scan the grid row by row, then cell by cell
@@ -125,14 +130,28 @@ def main():
     generations = 20
 
     if len(sys.argv) > 1:
+        if sys.argv[1] == "--help":
+            print_usage()
+            return
+
         pattern_name = sys.argv[1]
 
     if len(sys.argv) > 2:
-        generations = int(sys.argv[2])
+        try:
+            generations = int(sys.argv[2])
+        except ValueError:
+            print("Generation count must be a number.")
+            print_usage()
+            return
+
+    if generations < 1:
+        print("Generation count must be at least 1.")
+        print_usage()
+        return
 
     if pattern_name not in patterns:
         print("Unknown pattern:", pattern_name)
-        print("Available patterns: blinker, glider")
+        print_usage()
         return
 
     run_simulation(patterns[pattern_name], generations)

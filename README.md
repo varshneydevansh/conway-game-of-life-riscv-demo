@@ -146,3 +146,21 @@ python3 conway.py glider 40
 python3 conway.py blinker 10
 ```
 
+The first argument chooses the starting pattern. 
+The second argument chooses how many clock ticks the simulation should run.
+
+This makes the program feel less hardcoded. 
+The Conway rules are still the same, but I can now control the experiment from the terminal.
+
+### Iteration 10 - Add usage help and safer command-line parsing
+In this version, I added a small `print_usage()` function and validation for the generation count.
+
+Now the program can explain itself:
+
+```bash
+python3 conway.py --help
+```
+I also added checks for invalid input. For example, this should not crash with a Python traceback:
+- python3 conway.py glider abc
+
+
