@@ -1,5 +1,5 @@
-# Conway's Game of Life - Iteration 15
-# Goal: add a no-clear mode for readable terminal logs
+# Conway's Game of Life - Iteration 16
+# Goal: detect when live cells touch the grid edge
 
 import os
 import sys
@@ -71,6 +71,26 @@ def count_live_cells(grid):
 
     return live_cells
 
+def has_live_cell_on_edge(grid):
+    last_row_index = len(grid) - 1
+    last_col_index = len(grid[0]) - 1
+
+    # We check every cell and report if a live cell is on the boundary
+    for row_index in range(len(grid)):
+        for col_index in range(len(grid[0])):
+            is_live = grid[row_index][col_index] == 1
+            is_edge = (
+                row_index == 0
+                or row_index == last_row_index
+                or col_index == 0
+                or col_index == last_col_index
+            )
+
+            if is_live and is_edge:
+                return True
+
+    return False
+
 def count_live_neighbors(grid, row_index, col_index):
     live_neighbors = 0
 
@@ -140,7 +160,15 @@ def run_simulation(starting_grid, generations, delay, clear_screen):
         if clear_screen:
             os.system("clear")
 
-        print("Generation:", generation, "| Live cells:", count_live_cells(current_grid))
+        edge_text = "yes" if has_live_cell_on_edge(current_grid) else "no"
+        print(
+            "Generation:",
+            generation,
+            "| Live cells:",
+            count_live_cells(current_grid),
+            "| Touching edge:",
+            edge_text,
+        )
         print_grid(current_grid)
         print()
 

@@ -233,4 +233,18 @@ python3 conway.py blinker 4 0 --no-clear
 ```
 
 
+This prints each generation one after another. It makes the blinker easier 
+to inspect because I can see the vertical and horizontal states in the same terminal output.
+
+### Iteration 16 - Detect live cells on the grid edge
+In this version, I added `has_live_cell_on_edge(grid)`.
+
+The current Conway world is finite. That means the cells outside the grid are 
+treated as dead because the neighbor-counting logic ignores positions outside the boundary.
+
+This matters most for the glider. A glider moves across the grid, and once it 
+touches the edge, its behavior can change because it no longer has the same space around it.
+
+The new output tells me whether any live cell is touching the boundary of the grid.
+
 
