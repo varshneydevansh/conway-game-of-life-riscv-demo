@@ -278,5 +278,22 @@ python3 conway.py block 10 0 --no-clear
 ```
 
 
+The block is a still-life pattern, so the program should print it once and then stop because the next generation is identical.
+
+### Iteration 19 - Detect repeating cycles
+In this version, I added cycle detection.
+
+A stable grid is one kind of repeated state, but there are also oscillators like 
+the blinker. The blinker does not stay fixed, but it returns to an earlier state after a few generations.
+
+I added `grid_to_key(grid)` so each grid can be converted into a tuple and stored in a `set`.
+
+Now the simulation remembers previous states. If the current grid has been seen before, the program stops because the future will repeat from that point.
+
+This is useful for testing the blinker:
+
+```bash
+python3 conway.py blinker 10 0 --no-clear
+```
 
 

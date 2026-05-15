@@ -1,5 +1,5 @@
-# Conway's Game of Life - Iteration 18
-# Goal: stop early when the grid reaches a stable state
+# Conway's Game of Life - Iteration 19
+# Goal: detect repeating grid cycles
 
 import os
 import sys
@@ -98,6 +98,15 @@ def has_live_cell_on_edge(grid):
 
     return False
 
+def grid_to_key(grid):
+    rows = []
+
+    # Convert the grid into a tuple so it can be stored in a set
+    for row in grid:
+        rows.append(tuple(row))
+
+    return tuple(rows)
+
 def count_live_neighbors(grid, row_index, col_index):
     live_neighbors = 0
 
@@ -160,12 +169,21 @@ def next_generation(current_grid):
 
 def run_simulation(starting_grid, generations, delay, clear_screen):
     current_grid = starting_grid
+    seen_grids = set()
 
     # This outer loop is the simulation clock
     # Each pass shows one generation and then computes the next one
     for generation in range(generations):
         if clear_screen:
             os.system("clear")
+        
+        grid_key = grid_to_key(current_grid)
+
+        if grid_key in seen_grids:
+            print("Grid has entered a repeating cycle. Stopping simulation.")
+            return
+
+        seen_grids.add(grid_key)
 
         live_cells = count_live_cells(current_grid)
         edge_text = "yes" if has_live_cell_on_edge(current_grid) else "no"
