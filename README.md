@@ -204,3 +204,15 @@ For example:
 
 This connects to a systems idea: sometimes visual output is useful, but adding a small numeric signal makes behavior easier to verify.
 
+
+### Iteration 14 - Choose the display delay
+In this version, I added a third command-line argument for the delay between generations.
+
+Now I can run:
+
+```bash
+python3 conway.py glider 40 0.2
+python3 conway.py block 5 1
+```
+
+

@@ -1,5 +1,5 @@
-# Conway's Game of Life - Iteration 13
-# Goal: show the live cell count for each generation
+# Conway's Game of Life - Iteration 14
+# Goal: choose the display delay from the command line
 
 import os
 import sys
@@ -44,9 +44,9 @@ patterns = {
 def print_usage():
     available_patterns = ", ".join(patterns)
 
-    print("Usage: python3 conway.py [pattern] [generations]")
+    print("Usage: python3 conway.py [pattern] [generations] [delay]")
     print("Patterns:", available_patterns)
-    print("Example: python3 conway.py glider 40")
+    print("Example: python3 conway.py glider 40 0.5")
 
 def print_grid(grid):
     # We scan the grid row by row, then cell by cell
@@ -131,7 +131,7 @@ def next_generation(current_grid):
     return next_grid
 
 
-def run_simulation(starting_grid, generations):
+def run_simulation(starting_grid, generations, delay):
     current_grid = starting_grid
 
     # This outer loop is the simulation clock
@@ -142,7 +142,7 @@ def run_simulation(starting_grid, generations):
         print("Generation:", generation, "| Live cells:", count_live_cells(current_grid))
         print_grid(current_grid)
 
-        time.sleep(0.5)
+        time.sleep(delay)
 
         current_grid = next_generation(current_grid)
 
@@ -150,6 +150,7 @@ def run_simulation(starting_grid, generations):
 def main():
     pattern_name = "glider"
     generations = 20
+    delay = 0.5
 
     if len(sys.argv) > 1:
         if sys.argv[1] == "--help":
@@ -170,13 +171,26 @@ def main():
         print("Generation count must be at least 1.")
         print_usage()
         return
+    
+    if len(sys.argv) > 3:
+        try:
+            delay = float(sys.argv[3])
+        except ValueError:
+            print("Delay must be a number.")
+            print_usage()
+            return
+    
+    if delay < 0:
+        print("Delay cannot be negative.")
+        print_usage()
+        return
 
     if pattern_name not in patterns:
         print("Unknown pattern:", pattern_name)
         print_usage()
         return
 
-    run_simulation(patterns[pattern_name], generations)
+    run_simulation(patterns[pattern_name], generations, delay)
 
 
 
