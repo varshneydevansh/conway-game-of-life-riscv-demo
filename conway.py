@@ -1,5 +1,5 @@
-# Conway's Game of Life - Iteration 11
-# Goal: generate help text from the available pattern list
+# Conway's Game of Life - Iteration 12
+# Goal: add a stable still-life pattern
 
 import os
 import sys
@@ -26,9 +26,19 @@ glider_grid = [
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 ]
 
+block_grid = [
+    [0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0],
+    [0, 0, 1, 1, 0, 0],
+    [0, 0, 1, 1, 0, 0],
+    [0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0],
+]
+
 patterns = {
     "blinker": blinker_grid,
     "glider": glider_grid,
+    "block": block_grid,
 }
 
 def print_usage():

@@ -178,3 +178,13 @@ That kind of duplication can become a bug later.
 If I add a new pattern, I want the help text to update automatically.
 
 
+### Iteration 12 - Add a stable block pattern
+In this version, I added `block_grid`, which is a still-life pattern.
+
+Unlike the blinker or glider, the block does not move or oscillate. 
+It stays the same because each live cell has exactly 3 live neighbors, 
+so every live cell survives and no surrounding dead cell has exactly 3 neighbors.
+
+This also tests the improvement from the previous iteration. I only added 
+the pattern to the `patterns` dictionary, and the help text now includes it automatically.
+
