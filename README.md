@@ -129,3 +129,20 @@ Now I can run:
 python3 conway.py glider
 python3 conway.py blinker
 ```
+
+The important idea is that the Conway engine is still unchanged. 
+I am only choosing a different initial memory state before starting the simulation.
+
+This also explains why the output is predictable: there is no randomness here. 
+The same pattern and the same rules will always produce the same generations.
+
+### Iteration 9 - Choose the number of generations
+In this version, I added one more command-line argument for the generation count.
+
+Now I can run:
+
+```bash
+python3 conway.py glider 40
+python3 conway.py blinker 10
+```
+

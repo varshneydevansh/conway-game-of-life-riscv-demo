@@ -1,5 +1,5 @@
-# Conway's Game of Life - Iteration 8
-# Goal: choose the starting pattern from the command line
+# Conway's Game of Life - Iteration 9
+# Goal: choose the pattern and generation count from the command line
 
 import os
 import sys
@@ -122,16 +122,21 @@ def run_simulation(starting_grid, generations):
 
 def main():
     pattern_name = "glider"
+    generations = 20
 
     if len(sys.argv) > 1:
         pattern_name = sys.argv[1]
+
+    if len(sys.argv) > 2:
+        generations = int(sys.argv[2])
 
     if pattern_name not in patterns:
         print("Unknown pattern:", pattern_name)
         print("Available patterns: blinker, glider")
         return
 
-    run_simulation(patterns[pattern_name], 20)
+    run_simulation(patterns[pattern_name], generations)
+
 
 
 
