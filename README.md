@@ -66,3 +66,16 @@ I also added boundary checks so the program does not try to read outside the gri
 
 For the vertical blinker pattern, the center cell has 2 live neighbors: one above it and one below it.
 
+### Iteration 4 - Compute the next generation
+In this version, I added the actual Conway rule logic.
+
+The important idea here is that I do not modify the current grid directly. I read from `current_grid` and write into a separate `next_grid`.
+
+This matters because all cells should observe the same generation. If I update the grid in place, then later cells would read a partially changed world.
+
+I added two functions:
+
+- `next_cell_state(current_cell, live_neighbors)` applies Conway's rules for one cell
+- `next_generation(current_grid)` scans the full grid and builds the next grid
+
+The vertical blinker now turns into a horizontal blinker after one generation.
