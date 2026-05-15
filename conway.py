@@ -1,7 +1,8 @@
-# Conway's Game of Life - Iteration 7
-# Goal: separate the simulation engine from named starting patterns
+# Conway's Game of Life - Iteration 8
+# Goal: choose the starting pattern from the command line
 
 import os
+import sys
 import time
 
 blinker_grid = [
@@ -24,6 +25,11 @@ glider_grid = [
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 ]
+
+patterns = {
+    "blinker": blinker_grid,
+    "glider": glider_grid,
+}
 
 def print_grid(grid):
     # We scan the grid row by row, then cell by cell
@@ -115,7 +121,18 @@ def run_simulation(starting_grid, generations):
 
 
 def main():
-    run_simulation(glider_grid, 20)
+    pattern_name = "glider"
+
+    if len(sys.argv) > 1:
+        pattern_name = sys.argv[1]
+
+    if pattern_name not in patterns:
+        print("Unknown pattern:", pattern_name)
+        print("Available patterns: blinker, glider")
+        return
+
+    run_simulation(patterns[pattern_name], 20)
+
 
 
 if __name__ == "__main__":

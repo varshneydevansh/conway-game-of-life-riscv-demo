@@ -119,3 +119,13 @@ Earlier, the program only had one `grid`. Now I have:
 This is important because the Conway engine did not need to change. I only changed the input pattern.
 
 That makes the code feel more like a reusable machine: different initial memory states can run through the same rules and produce different behavior.
+
+### Iteration 8 - Choose the starting pattern from the command line
+In this version, I added a small command-line choice for the starting pattern.
+
+Now I can run:
+
+```bash
+python3 conway.py glider
+python3 conway.py blinker
+```
