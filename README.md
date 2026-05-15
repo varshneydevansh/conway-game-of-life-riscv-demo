@@ -260,3 +260,23 @@ Now I can test that behavior with:
 
 ```bash
 python3 conway.py lonely 5 0 --no-clear
+```
+
+This is a small optimization and also a state-machine lesson: once the system reaches a terminal state, there is no useful future work to compute.
+
+### Iteration 18 - Stop when the grid becomes stable
+In this version, I added stable-state detection.
+
+After printing the current generation, the program computes `next_grid`. If `next_grid == current_grid`, then the state has reached a fixed point.
+
+That means applying Conway's rules again will not change anything, so the simulation can stop early.
+
+This is useful for the `block` pattern:
+
+```bash
+python3 conway.py block 10 0 --no-clear
+```
+
+
+
+

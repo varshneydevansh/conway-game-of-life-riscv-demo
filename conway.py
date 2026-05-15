@@ -1,5 +1,5 @@
-# Conway's Game of Life - Iteration 17
-# Goal: stop early when no live cells remain
+# Conway's Game of Life - Iteration 18
+# Goal: stop early when the grid reaches a stable state
 
 import os
 import sys
@@ -186,9 +186,15 @@ def run_simulation(starting_grid, generations, delay, clear_screen):
             return
 
 
+        next_grid = next_generation(current_grid)
+
+        if next_grid == current_grid:
+            print("Grid is stable. Stopping simulation.")
+            return
+
         time.sleep(delay)
 
-        current_grid = next_generation(current_grid)
+        current_grid = next_grid
 
 
 def main():
