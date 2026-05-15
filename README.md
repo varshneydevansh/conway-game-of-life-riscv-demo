@@ -248,3 +248,15 @@ touches the edge, its behavior can change because it no longer has the same spac
 The new output tells me whether any live cell is touching the boundary of the grid.
 
 
+### Iteration 17 - Stop when all cells are dead
+In this version, I added an early stop condition.
+
+If `count_live_cells(current_grid)` becomes 0, then the simulation stops because an empty grid will stay empty forever.
+
+I also added a `lonely` pattern with one live cell. 
+In Conway's rules, a single live cell has no live neighbors, so it dies after one generation.
+
+Now I can test that behavior with:
+
+```bash
+python3 conway.py lonely 5 0 --no-clear

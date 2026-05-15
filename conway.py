@@ -1,5 +1,5 @@
-# Conway's Game of Life - Iteration 16
-# Goal: detect when live cells touch the grid edge
+# Conway's Game of Life - Iteration 17
+# Goal: stop early when no live cells remain
 
 import os
 import sys
@@ -35,10 +35,17 @@ block_grid = [
     [0, 0, 0, 0, 0, 0],
 ]
 
+lonely_cell_grid = [
+    [0, 0, 0],
+    [0, 1, 0],
+    [0, 0, 0],
+]
+
 patterns = {
     "blinker": blinker_grid,
     "glider": glider_grid,
     "block": block_grid,
+    "lonely": lonely_cell_grid,
 }
 
 def print_usage():
@@ -160,17 +167,24 @@ def run_simulation(starting_grid, generations, delay, clear_screen):
         if clear_screen:
             os.system("clear")
 
+        live_cells = count_live_cells(current_grid)
         edge_text = "yes" if has_live_cell_on_edge(current_grid) else "no"
+
         print(
             "Generation:",
             generation,
             "| Live cells:",
-            count_live_cells(current_grid),
+            live_cells,
             "| Touching edge:",
             edge_text,
         )
         print_grid(current_grid)
         print()
+
+        if live_cells == 0:
+            print("All cells are dead. Stopping simulation.")
+            return
+
 
         time.sleep(delay)
 
