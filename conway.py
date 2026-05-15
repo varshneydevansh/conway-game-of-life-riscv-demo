@@ -1,15 +1,28 @@
-# Conway's Game of Life - Iteration 6
-# Goal: move the simulation loop into a main entry point
+# Conway's Game of Life - Iteration 7
+# Goal: separate the simulation engine from named starting patterns
 
 import os
 import time
 
-grid = [
+blinker_grid = [
     [0, 0, 0, 0, 0],
     [0, 0, 1, 0, 0],
     [0, 0, 1, 0, 0],
     [0, 0, 1, 0, 0],
     [0, 0, 0, 0, 0],
+]
+
+glider_grid = [
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 1, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 1, 0, 0, 0, 0, 0, 0],
+    [0, 1, 1, 1, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 ]
 
 def print_grid(grid):
@@ -102,7 +115,7 @@ def run_simulation(starting_grid, generations):
 
 
 def main():
-    run_simulation(grid, 8)
+    run_simulation(glider_grid, 20)
 
 
 if __name__ == "__main__":

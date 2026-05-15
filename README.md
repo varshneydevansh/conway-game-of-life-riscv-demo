@@ -107,3 +107,15 @@ The behavior is still the same, but the structure is clearer now:
 - `main` is the entry point of the script
 
 This makes the script easier to extend later without mixing setup code and simulation code.
+
+### Iteration 7 - Add named starting patterns
+In this version, I separated the starting pattern from the simulation logic.
+
+Earlier, the program only had one `grid`. Now I have:
+
+- `blinker_grid`, which shows oscillation
+- `glider_grid`, which shows movement across the grid
+
+This is important because the Conway engine did not need to change. I only changed the input pattern.
+
+That makes the code feel more like a reusable machine: different initial memory states can run through the same rules and produce different behavior.
