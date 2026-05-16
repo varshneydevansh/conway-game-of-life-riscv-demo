@@ -1,5 +1,5 @@
-# Conway's Game of Life - Iteration 20
-# Goal: inspect how one cell decides its next state
+# Conway's Game of Life - Iteration 21
+# Goal: choose which cell to explain from the command line
 
 import os
 import sys
@@ -51,9 +51,9 @@ patterns = {
 def print_usage():
     available_patterns = ", ".join(patterns)
 
-    print("Usage: python3 conway.py [pattern] [generations] [delay] [--no-clear]")
+    print("Usage: python3 conway.py [pattern] [generations] [delay] [--no-clear] [--explain row col]")
     print("Patterns:", available_patterns)
-    print("Example: python3 conway.py glider 40 0.5 --no-clear")
+    print("Example: python3 conway.py glider 40 0.5 --no-clear --explain 2 2")
 
 def print_grid(grid):
     # We scan the grid row by row, then cell by cell
@@ -186,7 +186,7 @@ def explain_cell(grid, row_index, col_index):
         cell_state_name(next_state),
     )
 
-def run_simulation(starting_grid, generations, delay, clear_screen):
+def run_simulation(starting_grid, generations, delay, clear_screen, explain_row, explain_col):
     current_grid = starting_grid
     seen_grids = set()
 
@@ -204,6 +204,10 @@ def run_simulation(starting_grid, generations, delay, clear_screen):
 
         seen_grids.add(grid_key)
 
+        if explain_row is None:
+            explain_row = len(starting_grid) // 2
+            explain_col = len(starting_grid[0]) // 2
+        
         live_cells = count_live_cells(current_grid)
         edge_text = "yes" if has_live_cell_on_edge(current_grid) else "no"
 
@@ -219,7 +223,7 @@ def run_simulation(starting_grid, generations, delay, clear_screen):
         print()
 
         if generation == 0:
-            explain_cell(current_grid, len(current_grid) // 2, len(current_grid[0]) // 2)
+            explain_cell(current_grid, explain_row, explain_col)
             print()
         
         if live_cells == 0:
@@ -243,6 +247,8 @@ def main():
     generations = 20
     delay = 0.5
     clear_screen = True
+    explain_row = None
+    explain_col = None
 
     if len(sys.argv) > 1:
         if sys.argv[1] == "--help":
@@ -271,11 +277,32 @@ def main():
             print("Delay must be a number.")
             print_usage()
             return
-    if len(sys.argv) > 4:
-        if sys.argv[4] == "--no-clear":
+    
+    option_index = 4
+
+    while option_index < len(sys.argv):
+        option = sys.argv[option_index]
+
+        if option == "--no-clear":
             clear_screen = False
+            option_index += 1
+        elif option == "--explain":
+            if option_index + 2 >= len(sys.argv):
+                print("--explain needs a row and column.")
+                print_usage()
+                return
+
+            try:
+                explain_row = int(sys.argv[option_index + 1])
+                explain_col = int(sys.argv[option_index + 2])
+            except ValueError:
+                print("Explain row and column must be numbers.")
+                print_usage()
+                return
+
+            option_index += 3
         else:
-            print("Unknown option:", sys.argv[4])
+            print("Unknown option:", option)
             print_usage()
             return
     
@@ -289,7 +316,18 @@ def main():
         print_usage()
         return
 
-    run_simulation(patterns[pattern_name], generations, delay, clear_screen)
+    selected_grid = patterns[pattern_name]
+
+    if explain_row is not None:
+        row_is_inside = 0 <= explain_row < len(selected_grid)
+        col_is_inside = 0 <= explain_col < len(selected_grid[0])
+
+        if not row_is_inside or not col_is_inside:
+            print("Explain cell is outside the grid.")
+            print_usage()
+            return
+    
+    run_simulation(patterns[pattern_name], generations, delay, clear_screen, explain_row, explain_col)
 
 
 

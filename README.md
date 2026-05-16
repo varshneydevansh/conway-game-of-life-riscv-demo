@@ -307,3 +307,15 @@ The full grid can look complex, but each generation is made from one-cell decisi
 
 This helps connect the visual grid back to Conway's rules. 
 If I can understand one cell's transition, then the full grid is just the same logic repeated across every cell.
+
+
+### Iteration 21 - Choose which cell to explain
+In this version, I made the cell explanation configurable from the command line.
+
+Earlier, the program always explained the center cell. 
+Now I can choose a specific row and column:
+
+```bash
+python3 conway.py blinker 3 0 --no-clear --explain 2 2
+```
+
