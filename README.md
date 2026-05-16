@@ -296,4 +296,14 @@ This is useful for testing the blinker:
 python3 conway.py blinker 10 0 --no-clear
 ```
 
+### Iteration 20 - Explain one cell decision
+In this version, I added a small debugging/explanation function called `explain_cell(grid, row_index, col_index)`.
 
+The full grid can look complex, but each generation is made from one-cell decisions. For one selected cell, the program now prints:
+
+- whether the cell is currently alive or dead
+- how many live neighbors it has
+- whether it will be alive or dead in the next generation
+
+This helps connect the visual grid back to Conway's rules. 
+If I can understand one cell's transition, then the full grid is just the same logic repeated across every cell.

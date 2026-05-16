@@ -1,5 +1,5 @@
-# Conway's Game of Life - Iteration 19
-# Goal: detect repeating grid cycles
+# Conway's Game of Life - Iteration 20
+# Goal: inspect how one cell decides its next state
 
 import os
 import sys
@@ -144,6 +144,11 @@ def next_cell_state(current_cell, live_neighbors):
 
     return 0
 
+def cell_state_name(cell):
+    if cell == 1:
+        return "alive"
+
+    return "dead"
 
 def next_generation(current_grid):
     next_grid = []
@@ -166,6 +171,20 @@ def next_generation(current_grid):
 
     return next_grid
 
+def explain_cell(grid, row_index, col_index):
+    current_cell = grid[row_index][col_index]
+    live_neighbors = count_live_neighbors(grid, row_index, col_index)
+    next_state = next_cell_state(current_cell, live_neighbors)
+
+    print(
+        "Cell",
+        "(" + str(row_index) + ", " + str(col_index) + "):",
+        cell_state_name(current_cell),
+        "| Live neighbors:",
+        live_neighbors,
+        "| Next state:",
+        cell_state_name(next_state),
+    )
 
 def run_simulation(starting_grid, generations, delay, clear_screen):
     current_grid = starting_grid
@@ -199,6 +218,10 @@ def run_simulation(starting_grid, generations, delay, clear_screen):
         print_grid(current_grid)
         print()
 
+        if generation == 0:
+            explain_cell(current_grid, len(current_grid) // 2, len(current_grid[0]) // 2)
+            print()
+        
         if live_cells == 0:
             print("All cells are dead. Stopping simulation.")
             return
