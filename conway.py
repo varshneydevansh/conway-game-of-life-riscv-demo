@@ -1,5 +1,5 @@
-# Conway's Game of Life - Iteration 22
-# Goal: show the grid dimensions for each generation
+# Conway's Game of Life - Final Demo
+# Goal: demonstrate iteration, grid state, and Conway rule updates in Python
 
 import os
 import sys
@@ -54,6 +54,7 @@ def print_usage():
     print("Usage: python3 conway.py [pattern] [generations] [delay] [--no-clear] [--explain row col]")
     print("Patterns:", available_patterns)
     print("Example: python3 conway.py glider 40 0.5 --no-clear --explain 2 2")
+    print("Use --no-clear for readable logs and --explain row col to inspect one cell.")
 
 def print_grid(grid):
     # We scan the grid row by row, then cell by cell
@@ -335,7 +336,7 @@ def main():
             print_usage()
             return
     
-    run_simulation(patterns[pattern_name], generations, delay, clear_screen, explain_row, explain_col)
+    run_simulation(selected_grid, generations, delay, clear_screen, explain_row, explain_col)
 
 
 

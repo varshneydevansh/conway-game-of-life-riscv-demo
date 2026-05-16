@@ -330,4 +330,23 @@ The blinker is small, the glider needs more room to move, and the block is a sep
 This is also a memory-layout idea: before scanning a grid, I should understand its shape.
 
 
+### Final cleanup
+At this point, the core Conway demo is complete.
+
+I cleaned up the final script so the command-line help explains the 
+available options, and the simulation uses the already-selected grid consistently.
+
+The final demo supports:
+
+- choosing a starting pattern
+- choosing the number of generations
+- changing the display delay
+- keeping all generations visible with `--no-clear`
+- explaining one cell's next-state decision with `--explain row col`
+- stopping early when the grid dies, stabilizes, or repeats
+
+The main point of the project is still the same: Conway's Game of Life 
+is a small visible example of repeated state updates over a grid.
+
+
 
