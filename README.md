@@ -27,7 +27,7 @@ python3 conway.py glider 10 0 --no-clear
 
 Inspect one cell:
 ```bash
-python3 conway.py glider 3 0 --no-clear --inspect 2 2
+python3 conway.py glider 3 0 --no-clear --explain 2 2
 ```
 
 Show help:
@@ -456,6 +456,5 @@ The final demo supports:
 
 The main point of the project is still the same: Conway's Game of Life 
 is a small visible example of repeated state updates over a grid.
-
 
 
