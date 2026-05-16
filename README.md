@@ -319,3 +319,15 @@ Now I can choose a specific row and column:
 python3 conway.py blinker 3 0 --no-clear --explain 2 2
 ```
 
+### Iteration 22 - Show grid size
+In this version, I added `grid_size_text(grid)`.
+
+The program now prints the grid dimensions with each generation, for example `5x5` or `10x10`.
+
+This matters because different patterns use different grid sizes. 
+The blinker is small, the glider needs more room to move, and the block is a separate still-life example.
+
+This is also a memory-layout idea: before scanning a grid, I should understand its shape.
+
+
+

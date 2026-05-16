@@ -1,5 +1,5 @@
-# Conway's Game of Life - Iteration 21
-# Goal: choose which cell to explain from the command line
+# Conway's Game of Life - Iteration 22
+# Goal: show the grid dimensions for each generation
 
 import os
 import sys
@@ -77,6 +77,12 @@ def count_live_cells(grid):
             live_cells += cell
 
     return live_cells
+
+def grid_size_text(grid):
+    row_count = len(grid)
+    col_count = len(grid[0])
+
+    return str(row_count) + "x" + str(col_count)
 
 def has_live_cell_on_edge(grid):
     last_row_index = len(grid) - 1
@@ -214,6 +220,8 @@ def run_simulation(starting_grid, generations, delay, clear_screen, explain_row,
         print(
             "Generation:",
             generation,
+            "| Size:",
+            grid_size_text(current_grid),
             "| Live cells:",
             live_cells,
             "| Touching edge:",
